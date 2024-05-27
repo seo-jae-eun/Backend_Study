@@ -1,7 +1,6 @@
 public class BST {
     Integer[] bstArray;
     Integer data;
-    Integer index;
 
     void insert() {
         int index = 1;
