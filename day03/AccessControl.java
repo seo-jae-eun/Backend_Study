@@ -17,7 +17,6 @@ public class AccessControl {
     }
 
     void print() {
-
         System.out.println(this.num04);
     }
 }

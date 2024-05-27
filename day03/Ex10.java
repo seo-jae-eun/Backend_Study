@@ -1,7 +1,7 @@
 public class Ex10 {
     // singleton
     public static void main(String[] args) {
-        // Singleton클래스의 생성자에 private이 달려있어서
+        // Singleton 클래스의 생성자에 private이 달려있어서
         // 객체 생성을 할 수 없음
         // Singleton s;
         // s = new Singleton();

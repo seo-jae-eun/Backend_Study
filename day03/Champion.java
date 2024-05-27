@@ -16,6 +16,4 @@ public class Champion {
         hp = InputHp;
         def = 10;
     }
-
-
 }
