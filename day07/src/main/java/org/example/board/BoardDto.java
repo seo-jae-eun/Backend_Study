@@ -1,17 +1,17 @@
-package org.example.Board;
+package org.example.board;
 
 public class BoardDto {
     private Integer idx;
     private String title;
     private String contents;
 
-    public BoardDto(Integer idx, String title, String contents) {
-        this.idx = idx;
+    public BoardDto(String title, String contents) {
         this.title = title;
         this.contents = contents;
     }
 
-    public BoardDto(String title, String contents) {
+    public BoardDto(Integer idx, String title, String contents) {
+        this.idx = idx;
         this.title = title;
         this.contents = contents;
     }
