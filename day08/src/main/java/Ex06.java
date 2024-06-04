@@ -10,16 +10,13 @@ public class Ex06 {
 
 
         // 팀원마다 가진 과자들을 추가
-        ArrayList<Snack> snackList = new ArrayList<Snack>(0);
         Snack s1 = new Snack("이클립스", 3000, "워터멜론향");
         Snack s2 = new Snack("이클립스", 3000, "복숭아향");
         Snack s3 = new Snack("이클립스", 3000, "딸기향");
 
-        snackList.add(s1);
-        snackList.add(s2);
-        snackList.add(s3);
-
-        h1.snacks = snackList;
+        h1.snacks.add(s1);
+        h1.snacks.add(s2);
+        h1.snacks.add(s3);
 
         
         // 팀원을 휴먼 리스트에 추가

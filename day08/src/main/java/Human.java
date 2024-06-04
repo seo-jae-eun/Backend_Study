@@ -8,14 +8,9 @@ public class Human {
     // 과자   과자를 여러개 저장
     ArrayList<Snack> snacks;
 
-    public Human(String name, int age, ArrayList<Snack> snacks) {
-        this.name = name;
-        this.age = age;
-        this.snacks = snacks;
-    }
-
     public Human(String name, int age) {
         this.name = name;
         this.age = age;
+        this.snacks = new ArrayList<>();
     }
 }
