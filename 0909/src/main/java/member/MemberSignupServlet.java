@@ -43,7 +43,7 @@ public class MemberSignupServlet extends HttpServlet {
 
         // ------------------- 회원 가입하는 Dao의 메소드 실행 -------------------
 //        Boolean result = dao.create(dto);
-        Boolean result = false;
+        Boolean result = true;
         // ------------------- ------------------- -------------------
 
 
