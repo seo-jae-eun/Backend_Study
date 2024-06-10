@@ -12,6 +12,7 @@ public class Stack<T> {
     // 어디까지 저장했는지를 기억할 변수에 -1을 저장
     public Stack(Class<T> clazz, int length) {
         this.stackArray = (T[]) Array.newInstance(clazz, length);
+//        this.stackArray = (T[])new Object[length];
         this.top = -1;
     }
 
@@ -105,7 +106,6 @@ public class Stack<T> {
 
 
         for(int i = 0; i < infixStr.length(); i++) {
-            int order = 0;
             if(infixStr.charAt(i) >= '1' && infixStr.charAt(i) <= '9') {
                 result += Character.toString(infixStr.charAt(i));
             }

@@ -11,6 +11,7 @@ public class LinkedList {
     //  tail에 null을 저장
 
     public LinkedList() {
+        head = null;
         tail = null;
     }
 
@@ -78,13 +79,14 @@ public class LinkedList {
     //      tail에 생성한 노드 저장
     //      head에 생성한 노드 저장
     public void insertFirst(Integer number) {
+        Node node = new Node(number);
         if(tail != null) {
-            Node node = new Node(number);
+//            Node node = new Node(number);
             node.setNextNode(head);
             head = node;
         }
         else {
-            Node node = new Node(number);
+//            Node node = new Node(number);
             tail = node;
             head = node;
         }
@@ -103,13 +105,14 @@ public class LinkedList {
     //      tail에 생성한 노드 저장
     //      head에 생성한 노드 저장
     public void insertLast(Integer number) {
+        Node node = new Node(number);
         if(tail != null) {
-            Node node = new Node(number);
+//            Node node = new Node(number);
             tail.setNextNode(node);
             tail = node;
         }
         else {
-            Node node = new Node(number);
+//            Node node = new Node(number);
             tail = node;
             head = node;
         }
