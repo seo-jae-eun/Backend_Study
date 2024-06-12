@@ -79,5 +79,88 @@ public class Bst {
     //  1. 자식이 없을 때     바로 삭제
     //  2. 자식이 하나일 때   자식이 부모로 대체
     //  3. 자식이 2개일 때    왼쪽의 서브트리에서 제일 큰 노드가 삭제되는 노드를 대체
+    public void remove(Integer data) {
+        Node target;
+        target = this.root;
+        Node parents = null;
+
+        if(target != null) {
+            while(true) {
+                if(target.getData() == data) {
+                    break;
+                }
+                if(data > target.getData()) {
+                    parents = target;
+                    target = (Node)target.getRight();
+                }
+                if(data < target.getData()) {
+                    parents = target;
+                    target = (Node)target.getLeft();
+                }
+
+            }
+
+
+            //  1. 자식이 없을 때     바로 삭제
+            if(target.getLeft() == null && target.getRight() == null) {
+                if(target.getData() > parents.getData()) {
+                    parents.setRight(null);
+                }
+                if(target.getData() < parents.getData()) {
+                    parents.setLeft(null);
+                }
+            }
+            //  2. 자식이 하나일 때   자식이 부모로 대체
+            else if(target.getLeft() != null && target.getRight() == null) {
+                if(target.getData() > parents.getData()) {
+                    parents.setRight((Node)target.getLeft());
+                    target.setRight(null);
+                }
+                if(target.getData() < parents.getData()) {
+                    parents.setLeft((Node)target.getLeft());
+                    target.setLeft(null);
+                }
+            } else if(target.getLeft() == null && target.getRight() != null) {
+                if(target.getData() > parents.getData()) {
+                    parents.setRight((Node)target.getRight());
+                    target.setRight(null);
+                }
+                if(target.getData() < parents.getData()) {
+                    parents.setLeft((Node)target.getRight());
+                    target.setLeft(null);
+                }
+            }
+            //  3. 자식이 2개일 때    왼쪽의 서브트리에서 제일 큰 노드가 삭제되는 노드를 대체
+            else {
+                Node maximum = (Node) target.getLeft();
+                Node maximumParents = target;
+                while(maximum.getRight() != null) {
+                    maximumParents = maximum;
+                    maximum = (Node)maximum.getRight();
+                }
+                if(!maximumParents.equals(target)) {
+                    maximumParents.setRight((Node)maximum.getLeft());
+                }
+
+                if(!target.getLeft().equals(maximum)) {
+                    maximum.setLeft((Node)target.getLeft());
+                }
+
+                maximum.setRight((Node)target.getRight());
+
+                if(parents == null) {
+                    this.root = maximum;
+                } else {
+                    if(target.getData() > parents.getData()) {
+                        parents.setRight(maximum);
+
+                    }
+                    if(target.getData() < parents.getData()) {
+                        parents.setLeft(maximum);
+                    }
+                }
+            }
+        }
+    }
 
 }

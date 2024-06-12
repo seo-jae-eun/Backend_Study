@@ -1,6 +1,6 @@
 package tree.trie;
 
-import java.util.Map;
+import java.util.*;
 
 public class Trie {
     
@@ -75,25 +75,108 @@ public class Trie {
         System.out.println("없음");
     }
 
-    // 5단계 -> 완성 x
-    public Integer count(String word) {
-        TrieNode currentNode = root;
-        for(int i = 0; i < word.length(); i++) {
-            if(word.charAt(i) == '?') {
-                // 물음표일 때....
+    // 5단계 -> 완성 x -> 망함
+//    public Integer count(String word) {
+//        TrieNode node = root;
+//        Queue<Character> queue = new LinkedList<>();
+//        Map<Character, Boolean> visited = new HashMap<>();
+//        for (int i = 0; i < word.length(); i++) {
+//            if (word.charAt(i) == '?') {
+////                queue.addAll(node.getChildNodes().keySet());
+////                System.out.println(queue);
+//
+//                queue.add(node.getData());
+//                System.out.println(node.getData());
+//                visited.put(node.getData(), true);
+//
+//                while(!queue.isEmpty()) {
+//                    Character outNode = queue.poll();
+//                    for(Character key : node.getChildNodes().keySet()) {
+//                        if(!visited.containsKey(key) || !visited.get(key) || visited.get(key) == null) {
+//                            queue.add(key);
+//                            System.out.println(key);
+//                            visited.put(key, true);
+//                        }
+//                    }
+//                }
+//            }
+//            if (!node.getChildNodes().containsKey(word.charAt(i))) return 0;
+//            node = node.getChildNodes().get(word.charAt(i));
+//        }
+//        return node.getCount();
+//    }
+
+    public int count(String word) { // BFS (너비 우선 탐색)
+        Queue<TrieNode> nodes = new LinkedList<>();
+        Queue<Integer> index = new LinkedList<>();
+        nodes.add(root);
+        index.add(0);
+        int count = 0;
+
+        while (!nodes.isEmpty()) {
+            TrieNode currentNode = nodes.poll();
+            int currentIndex = index.poll();
+
+            if (currentIndex == word.length()) {
+                if (currentNode.getLast()) {
+                    count += currentNode.getCount();
+                }
+                continue;
             }
-            if(currentNode.getChildNodes().containsKey(word.charAt(i))) {
-                currentNode = currentNode.getChildNodes().get(word.charAt(i));
-            }
-            else {
-                System.out.println("없음");
-                return currentNode.getCount();
+
+            char ch = word.charAt(currentIndex);
+            if (ch == '?') {
+                for (Map.Entry<Character, TrieNode> entry : currentNode.getChildNodes().entrySet()) {
+                    nodes.add(entry.getValue());
+                    index.add(currentIndex + 1);
+                }
+            } else {
+                TrieNode nextNode = currentNode.getChildNodes().get(ch);
+                if (nextNode != null) {
+                    nodes.add(nextNode);
+                    index.add(currentIndex + 1);
+                }
             }
         }
-        if(currentNode.getLast()) {
-            return currentNode.getCount();
+
+        return count;
+    }
+
+    public Integer count2(String word) { // DFS (깊이 우선 탐색)
+        Stack<TrieNode> nodeStack = new Stack<>();
+        Stack<String> wordStack = new Stack<>();
+
+        nodeStack.push(root);
+        wordStack.push(word);
+        int count = 0;
+
+        while (!nodeStack.isEmpty()) {
+            TrieNode currentNode = nodeStack.pop();
+            String currentWord = wordStack.pop();
+
+            if (currentWord.isEmpty()) {
+                count += currentNode.getCount();
+                continue;
+            }
+
+            char currentChar = currentWord.charAt(0);
+            String remainingWord = currentWord.substring(1);
+
+            if (currentChar == '?') {
+                for (TrieNode child : currentNode.getChildNodes().values()) {
+                    nodeStack.push(child);
+                    wordStack.push(remainingWord);
+                }
+            } else {
+                TrieNode nextNode = currentNode.getChildNodes().get(currentChar);
+                if (nextNode != null) {
+                    nodeStack.push(nextNode);
+                    wordStack.push(remainingWord);
+                }
+            }
         }
-        return currentNode.getCount();
+
+        return count;
     }
 
     public void printTrie() {
