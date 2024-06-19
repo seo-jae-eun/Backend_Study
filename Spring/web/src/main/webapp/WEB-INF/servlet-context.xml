@@ -9,7 +9,7 @@
 
 
     <!-- 컨트롤러 클래스의 객체를 빈으로 등록 -->
-    <beans:bean id="testController" class="com.sjb.web.TestController">
+    <beans:bean id="testController" class="com.sje.web.TestController">
     </beans:bean>
 
     <!-- 컨트롤러를 URL을 통해서 찾을 수 있도록 HandlerMapping에 등록 -->
