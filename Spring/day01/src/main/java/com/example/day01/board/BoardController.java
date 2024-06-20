@@ -19,7 +19,6 @@ public class BoardController {
         this.boardService = boardService;
     }
 
-
     // 1. 게시글 작성 기능
     // POST로 요청 모델을 받아서 응답 모델을 ResponseEntity에 담아서 반환하는 게시글 저장 메소드
     @RequestMapping(method = RequestMethod.POST, value = "/create")
