@@ -1,13 +1,12 @@
 package com.example.day04.product;
 
+import com.example.day04.file.FileUploadService;
 import com.example.day04.product.model.ProductCreateReq;
 import com.example.day04.product.model.ProductCreateRes;
 import com.example.day04.product.model.ProductDetailRes;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -15,15 +14,21 @@ import java.util.List;
 @RequestMapping("/product")
 public class ProductController {
     private final ProductService productService;
+    private final FileUploadService fileUploadService;
 
-    public ProductController(ProductService productService) {
+    public ProductController(ProductService productService, FileUploadService fileUploadService) {
         this.productService = productService;
+        this.fileUploadService = fileUploadService;
     }
 
+
     @RequestMapping(method = RequestMethod.POST, value = "/create")
-    public ResponseEntity<ProductCreateRes> create(@RequestBody ProductCreateReq productCreateReq) {
-        ProductCreateRes productCreateRes = productService.create(productCreateReq);
+    public ResponseEntity<ProductCreateRes> create(@RequestPart ProductCreateReq dto, @RequestPart MultipartFile file) {
+        String fileName = fileUploadService.upload(file);
+
+        ProductCreateRes productCreateRes = productService.create(dto, fileName);
         return ResponseEntity.ok(productCreateRes);
+
     }
 
     @RequestMapping("/detail")

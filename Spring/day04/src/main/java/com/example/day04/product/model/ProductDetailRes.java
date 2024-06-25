@@ -8,8 +8,9 @@ public class ProductDetailRes {
     private Integer addDeliveryPrice;
     private Integer outboundDays;
     private String sellerName;
+    private String imageUrl;
 
-    public ProductDetailRes(Long id, String productName, Integer productPrice, Integer deliveryPrice, Integer addDeliveryPrice, Integer outboundDays, String sellerName) {
+    public ProductDetailRes(Long id, String productName, Integer productPrice, Integer deliveryPrice, Integer addDeliveryPrice, Integer outboundDays, String sellerName, String imageUrl) {
         this.id = id;
         this.productName = productName;
         this.productPrice = productPrice;
@@ -17,6 +18,7 @@ public class ProductDetailRes {
         this.addDeliveryPrice = addDeliveryPrice;
         this.outboundDays = outboundDays;
         this.sellerName = sellerName;
+        this.imageUrl = imageUrl;
     }
 
     public Long getId() {
@@ -73,5 +75,13 @@ public class ProductDetailRes {
 
     public void setSellerName(String sellerName) {
         this.sellerName = sellerName;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
