@@ -40,14 +40,14 @@ public class SecurityConfig {
         http.httpBasic((auth) -> auth.disable()); // ??
 
         // 기본 페이지
-        http.formLogin(Customizer.withDefaults());
+//        http.formLogin(Customizer.withDefaults());
 
         http.authorizeHttpRequests((auth) ->
                 // /test/abc/def << 이런것도 포함(**)
                 auth
                         .requestMatchers(HttpMethod.GET,"/test/**", "/admin/**").hasRole("ADMIN") // ADMIN이라는 role이 있는 사람만 접근 가능하게 하는 설정
 //                        .requestMatchers("/test/**", "/mypage").authenticated() // 권한이 없으면 403이 뜨게 됨
-                        .requestMatchers("/member/**", "/login").permitAll() // 접근 허용
+                        .requestMatchers("/member/**", "/login", "/kakao/**").permitAll() // 접근 허용
                         .anyRequest().authenticated() // 위에서 설정하지 않은 페이지들에 대한 접근 설정
         );
         // 특정 페이지를 차단하고 나머지 다 허용 - 블랙리스트

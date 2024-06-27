@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class MemberService {
@@ -28,5 +30,14 @@ public class MemberService {
                 .role("ROLE_ADMIN")
                 .build();
         memberRepository.save(member);
+    }
+
+    public Member getMemberByEmail(String nickname) {
+        Optional<Member> result = memberRepository.findByEmail(nickname);
+        if(result.isPresent()) {
+            Member member = result.get();
+            return member;
+        }
+        return null;
     }
 }

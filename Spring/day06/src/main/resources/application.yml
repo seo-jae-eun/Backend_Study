@@ -28,5 +28,3 @@ logging:
 project:
   upload:
     path: c:\upload
-
-
