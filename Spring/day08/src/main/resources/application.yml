@@ -1,0 +1,33 @@
+imp:
+  imp_key: ${IMP_KEY}
+  imp_secret: ${IMP_SECRET}
+
+spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${USER_NAME}
+    password: ${PASSWORD}
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true
+            required: true
+          auth: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.mariadb.jdbc.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.MariaDBDialect
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
