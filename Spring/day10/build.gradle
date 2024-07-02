@@ -1,0 +1,39 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.3.1'
+	id 'io.spring.dependency-management' version '1.1.5'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-websocket'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	implementation group: 'org.kurento', name: 'kurento-client', version: '6.18.0'
+	implementation group: 'org.kurento', name: 'kurento-utils-js', version: '6.18.0'
+	implementation group: 'org.webjars', name: 'webjars-locator', version: '0.52'
+	implementation group: 'org.webjars', name: 'bootstrap', version: '5.3.3'
+	implementation group: 'org.webjars.bower', name: 'demo-console', version: '1.5.1'
+	implementation group: 'org.webjars', name: 'draggabilly', version: '2.1.0'
+	implementation group: 'org.webjars.bower', name: 'adapter.js', version: '6.4.0'
+	implementation group: 'org.webjars.bower', name: 'jquery', version: '3.7.1'
+	implementation group: 'org.webjars.bower', name: 'ekko-lightbox', version: '5.2.0'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
