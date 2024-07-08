@@ -10,4 +10,6 @@ import lombok.Setter;
 public class ReadPostRes {
     private Long idx;
     private String contents;
+    private String writer;
+    private Integer likesCount;
 }

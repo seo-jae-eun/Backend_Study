@@ -1,6 +1,7 @@
 package com.example.day13_tdd.likes;
 
 
+import com.example.day13_tdd.likes.model.response.CreateLikesRes;
 import com.example.day13_tdd.member.model.CustomUserDetails;
 import com.example.day13_tdd.member.model.Member;
 import com.example.day13_tdd.post.model.requset.CreatePostReq;
@@ -21,16 +22,16 @@ public class LikesController {
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/create")
-    public ResponseEntity<String> create(@AuthenticationPrincipal CustomUserDetails customUserDetails, Long idx) {
+    public ResponseEntity<CreateLikesRes> create(@AuthenticationPrincipal CustomUserDetails customUserDetails, Long idx) {
 
         Member member = null;
         if (customUserDetails != null) {
             member = customUserDetails.getMember();
         } else {
-            return ResponseEntity.badRequest().body("");
+            return ResponseEntity.badRequest().body(likesService.create(member, idx));
         }
-        likesService.create(member, idx);
-        return ResponseEntity.ok("");
+
+        return ResponseEntity.ok(likesService.create(member, idx));
     }
 
 }

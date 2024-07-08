@@ -7,6 +7,7 @@ import com.example.day13_tdd.post.model.response.CreatePostRes;
 import com.example.day13_tdd.post.model.response.ReadPostRes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.Optional;
 public class PostService {
     private final PostRepository postRepository;
 
+    @Transactional
     public CreatePostRes create(Member member, CreatePostReq request) {
         Post post = postRepository.save(Post.builder()
                 .contents(request.getContents())
@@ -30,6 +32,7 @@ public class PostService {
                 .build();
     }
 
+    @Transactional(readOnly = true)
     public ReadPostRes read(Long idx) {
         Optional<Post> result = postRepository.findById(idx);
 
@@ -38,6 +41,9 @@ public class PostService {
             return ReadPostRes.builder()
                     .idx(post.getIdx())
                     .contents(post.getContents())
+                    .writer(post.getMember().getEmail())
+//                    .likesCount(postRepository.getLikesCount(idx))
+                    .likesCount(post.getLikesCount())
                     .build();
         }
 

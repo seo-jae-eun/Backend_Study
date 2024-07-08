@@ -2,15 +2,22 @@ spring:
   jwt:
     secret: 12345678901234567890123456789012
   datasource:
-    url: ${DB_URL}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
-    driver-class-name: org.mariadb.jdbc.Driver
+    hikari:
+      primary:
+        jdbc-url: 
+        username:
+        password:
+        driver-class-name: org.mariadb.jdbc.Driver
+      secondary:
+        jdbc-url:
+        username:
+        password:
+        driver-class-name: org.mariadb.jdbc.Driver
 
   jpa:
     database-platform: org.hibernate.dialect.MariaDBDialect
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
         format_sql: true
