@@ -1,0 +1,31 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: member-api
+  jwt:
+    secret: ${JWT_SECRET}
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.mariadb.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MariaDBDialect
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+  servlet:
+    multipart:
+      maxFileSize: 10MB
+      maxRequestSize: 30MB
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://192.168.0.124:8001/eureka/
+    registerWithEureka: true
+    fetchRegistry: true
