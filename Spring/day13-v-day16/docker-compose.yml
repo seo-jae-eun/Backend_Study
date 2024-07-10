@@ -1,0 +1,36 @@
+services:
+  mariadb_master:
+    image: mariadb:latest
+    container_name: mariadb_master
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: qwer1234
+      MYSQL_DATABASE: day13
+      MYSQL_USER: slave_user
+      MYSQL_PASSWORD: qwer1234
+      MYSQL_MASTER_HOST: mariadb_master
+      MYSQL_MASTER_PORT: 3306
+    ports:
+      - "3306:3306"
+    volumes:
+      - master_data:/var/lib/mysql
+      - ./dbconfig/master.cnf:/etc/mysql/mariadb.conf.d/50-server.cnf
+  mariadb_slave:
+    image: mariadb:latest
+    container_name: mariadb_slave
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: qwer1234
+      MYSQL_DATABASE: day13
+      MYSQL_USER: slave_user
+      MYSQL_PASSWORD: qwer1234
+      MYSQL_SLAVE_HOST: mariadb_master
+      MYSQL_SLAVE_PORT: 3306
+    ports:
+      - "3307:3306"
+    volumes:
+      - slave_data:/var/lib/mysql
+      - ./dbconfig/slave.cnf:/etc/mysql/mariadb.conf.d/50-server.cnf
+volumes:
+  master_data:
+  slave_data:
