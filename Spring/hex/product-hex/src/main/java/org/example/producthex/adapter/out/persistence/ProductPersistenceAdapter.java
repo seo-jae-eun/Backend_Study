@@ -36,15 +36,15 @@ public class ProductPersistenceAdapter implements CreateProductPort, ReadProduct
 
     @Override
     public Product readProduct(Product product) {
-        Optional<ProductEntity> result = jpaProductRepository.findById(product.getId());
+        Optional<ProductEntity> result = jpaProductRepository.findByIdWithproductImage(product.getId());
         if(result.isPresent()) {
             ProductEntity productEntity = result.get();
-            Product newProduct = Product.builder()
+            return Product.builder()
                     .id(productEntity.getId())
                     .name(productEntity.getName())
                     .description(productEntity.getDescription())
+                    .imageFilePaths(productEntity.getProductImages().stream().map(ProductImageEntity::getPath).toList())
                     .build();
-            return newProduct;
         }
         return null;
     }

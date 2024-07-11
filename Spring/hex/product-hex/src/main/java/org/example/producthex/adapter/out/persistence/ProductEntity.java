@@ -23,5 +23,5 @@ public class ProductEntity {
     private String description;
 
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-    private List<ProductImageEntity> productImageList = new ArrayList<>();
+    private List<ProductImageEntity> productImages = new ArrayList<>();
 }

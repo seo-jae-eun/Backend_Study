@@ -1,4 +1,4 @@
-package org.example.producthex.adapter.in.web;
+package org.example.producthex.adapter.in.web.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

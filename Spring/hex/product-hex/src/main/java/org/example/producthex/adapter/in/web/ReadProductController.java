@@ -1,6 +1,7 @@
 package org.example.producthex.adapter.in.web;
 
 import lombok.RequiredArgsConstructor;
+import org.example.producthex.adapter.in.web.response.ReadProductResponse;
 import org.example.producthex.application.port.in.ReadProductCommand;
 import org.example.producthex.application.port.in.ReadProductUseCase;
 import org.example.producthex.common.WebAdapter;
@@ -13,10 +14,10 @@ public class ReadProductController {
     private final ReadProductUseCase readProductUseCase;
 
     @RequestMapping(method = RequestMethod.GET, value = "/product/read")
-    void read(Long id) {
+    ReadProductResponse read(Long id) {
         ReadProductCommand command = ReadProductCommand.builder()
                 .id(id)
                 .build();
-        readProductUseCase.readProduct(command);
+        return readProductUseCase.readProduct(command);
     }
 }
