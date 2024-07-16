@@ -1,0 +1,8 @@
+rootProject.name = 'day20'
+
+include 'common'
+include 'delivery-service'
+include 'order-service'
+include 'payment-service'
+include 'product-service'
+include 'report-service'
